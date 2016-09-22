@@ -2,7 +2,7 @@ package Strings;
 
 public class p1 {
     public static void main(String args[]) {
-        String input = "computer";
+        String input = "Massachusetts";
 
         StringBuffer ret = new StringBuffer();
         boolean unique = true;
