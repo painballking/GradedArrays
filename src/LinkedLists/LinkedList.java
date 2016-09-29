@@ -47,6 +47,19 @@ public class LinkedList {
         return false;
     }
 
+    public int length(){
+        if (!this.isEmpty()) {
+            int count = 0;
+            Node current = head;
+            while(current != null){
+                count++;
+                current = current.getNextReference();
+            }
+            return count;
+        }
+        return 0;
+    }
+
     public void insertAtFront(int input){
         if(head == null){
             head = new Node(input, null);
@@ -132,11 +145,33 @@ public class LinkedList {
     }
 
     public void bubbleSort(){
-        if (!this.isEmpty()) {
-            Node current = head;
-            while (current.getNextReference() != null) {
-                if (current.getData() < current.getNextReference().getData()) {
+        if (!this.isEmpty() && this.length() > 1) {
+            boolean swapped = true;
+            while(swapped){
+                swapped = false;
 
+                Node prev = null;
+                Node current = head;
+
+                while (current != null && current.getNextReference() != null) {
+                    if (current.getData() > current.getNextReference().getData()) {
+                        if(prev != null){
+                            prev.setNextReference(current.getNextReference());
+                        }
+                        else{
+                            head = current.getNextReference();
+                        }
+                        Node store = current.getNextReference().getNextReference();
+                        current.getNextReference().setNextReference(current);
+                        current.setNextReference(store);
+                        if(store == null){
+                            tail = current;
+                        }
+                        swapped = true;
+                        this.printList();
+                    }
+                    prev = current;
+                    current = current.getNextReference();
                 }
             }
         }

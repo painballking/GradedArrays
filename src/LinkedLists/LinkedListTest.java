@@ -1,82 +1,52 @@
 package LinkedLists;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class LinkedListTest
-{
+public class LinkedListTest {
 
-    public static void Menu()
-    {
-        System.out.println ("1 - Insert At Back ");
-        System.out.println ("2 - Insert At Front");
-        System.out.println ("3 - Remove From Front");
-        System.out.println ("4 - Remove From Back");
-        System.out.println ("5 - Move max to back");
-        System.out.println ("7 - Insert based on value");
-        System.out.println ("6 - Quit");
+    public static void mainMenu(){
+        System.out.println("1 - Insertion functions");
+        System.out.println("2 - Removal functions");
+        System.out.println("3 - Modifier functions");
+        System.out.println("4 - Select working list");
+        System.out.println("0 - Quit");
     }
 
+    public static void insertMenu(){
+        System.out.println("1 - Insert at back");
+        System.out.println("2 - Insert at front");
+        System.out.println("3 - Insert based on value");
+        System.out.println("0 - Back");
+    }
 
-    public static void main (String args [])
-    {
-        System.out.println ("Linked Lists");
-        Scanner scanner = new Scanner (System.in);
-        Scanner scanner1 = new Scanner (System.in);
+    public static void removeMenu(){
+        System.out.println("1 - Remove from back");
+        System.out.println("2 - Remove from front");
+        System.out.println("0 - Back");
+    }
 
+    public static void modifierMenu(){
+        System.out.println("1 - Move max to back");
+        System.out.println("2 - Bubble sort");
+        System.out.println("0 - Back");
+    }
 
-        int choice = 0, status = 0, entry = 0;
-        boolean flag = true;
-        LinkedList list = new LinkedList();
+    public static void main (String args []) {
+        Scanner input = new Scanner(System.in);
 
-        while (flag) {
-            Menu();
-            status = 0;
+        ArrayList<LinkedList> lists = new ArrayList<LinkedList>();
 
-            try {
-                choice = Integer.parseInt(scanner.nextLine());
-            }
-            catch (Exception e) {
-                System.out.println("Integers Only - Enter Again");
-                status = 1;
-            }
+        while(true){
+            mainMenu();
+            int choice = input.nextInt();
 
-            if (choice == 1) {
-                System.out.println ("Enter the value?");
-                entry = scanner1.nextInt();
-                list.insertAtBack(entry);
+            switch(choice){
+                case 1:
+                    Scanner temp = new Scanner(System.in);
+                    insertMenu();
+                    switch
             }
-
-            else if (choice == 2) {
-                System.out.println ("Enter the value?");
-                entry = scanner1.nextInt();
-                list.insertAtFront(entry);
-            }
-            else if (choice == 3) {
-                list.removeFromFront();
-            }
-
-            else if (choice == 4) {
-                list.removeFromBack();
-            }
-            else if(choice == 5){
-                list.moveMax();
-            }
-            else if (choice == 6) {
-                flag = false;
-                System.out.println ("End of Program");
-            }
-            else if(choice == 7){
-                System.out.println ("Enter the value?");
-                entry = scanner1.nextInt();
-                list.insertionPlace(entry);
-            }
-
-            else if (status == 0)
-            {
-                System.out.println ("Invalid Entry - Choose From Menu");
-            }
-            list.printList();
         }
-
     }
 }
