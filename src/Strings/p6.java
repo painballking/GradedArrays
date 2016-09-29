@@ -2,8 +2,8 @@ package Strings;
 
 public class p6 {
     public static void main(String args[]) {
-        String input1 = "together";
-        String input2 = "niether";
+        String input1 = "capillary";
+        String input2 = "marsupial";
 
         int[][] array = new int[input1.length()][input2.length()];
         int max = 0;

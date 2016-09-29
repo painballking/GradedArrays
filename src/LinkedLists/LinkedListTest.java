@@ -12,6 +12,7 @@ public class LinkedListTest
         System.out.println ("3 - Remove From Front");
         System.out.println ("4 - Remove From Back");
         System.out.println ("5 - Move max to back");
+        System.out.println ("7 - Insert based on value");
         System.out.println ("6 - Quit");
     }
 
@@ -63,6 +64,11 @@ public class LinkedListTest
             else if (choice == 6) {
                 flag = false;
                 System.out.println ("End of Program");
+            }
+            else if(choice == 7){
+                System.out.println ("Enter the value?");
+                entry = scanner1.nextInt();
+                list.insertionPlace(entry);
             }
 
             else if (status == 0)

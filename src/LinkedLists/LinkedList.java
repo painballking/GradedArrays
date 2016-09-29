@@ -81,25 +81,64 @@ public class LinkedList {
     }
 
     public void moveMax(){
-        if(head != null){
-            int maxValue = head.getData();
-            Node maxReference = head;
-            Node tempref = head;
-            while(tempref.getNextReference() != null){
-                if(tempref.getData() > maxValue){
-                    maxValue = tempref.getData();
-                    maxReference = tempref;
+        if(!this.isEmpty()){
+            Node i = head;
+            Node max = head;
+            while(i != null){
+                if(max.getData() < i.getData()){
+                    max = i;
                 }
-                tempref = tempref.getNextReference();
+                i = i.getNextReference();
             }
-            if(maxReference != tail){
-                tempref = head;
-                Node refBeforeMaxRef = head;
-                while(tempref.getNextReference() != maxReference){
+            if(max == head){
+                this.insertAtBack(max.getData());
+                head = head.getNextReference();
+            }
+            else if(max != tail){
+                Node refBeforeMax = head;
+                Node iter = head;
+                while(iter != max){
+                    refBeforeMax = iter;
+                    iter = iter.getNextReference();
+                }
+                refBeforeMax.setNextReference(iter.getNextReference());
+                this.insertAtBack(iter.getData());
+            }
+        }
+    }
+
+    public void insertionPlace(int input){
+        if(this.isEmpty()){
+            this.insertAtFront(input);
+        }
+        else{
+            Node tempref = head;
+            if (input < head.getData()) {
+                Node store = head;
+                head = new Node(input, store);
+            }
+            else{
+                while(tempref != null && tempref.getData() < input){
                     tempref = tempref.getNextReference();
+                }
+                if(tempref == null){
+                    this.insertAtBack(input);
+                }
+                else{
+                    tempref.setNextReference(new Node(input, tempref.getNextReference()));
                 }
             }
         }
     }
 
+    public void bubbleSort(){
+        if (!this.isEmpty()) {
+            Node current = head;
+            while (current.getNextReference() != null) {
+                if (current.getData() < current.getNextReference().getData()) {
+
+                }
+            }
+        }
+    }
 }
