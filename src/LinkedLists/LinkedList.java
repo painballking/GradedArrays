@@ -23,12 +23,12 @@ public class LinkedList {
 
     public void printList() {
         if (head == null) {
-            System.out.println ("The List is Empty");
+            System.out.println ("The List is Empty\n");
         }
         else {
             Node tempref = head;
 
-            System.out.println("The values so far in the list : ");
+            System.out.print("Linked List so far: ");
             while (tempref != null) {
                 System.out.print(tempref.getData());
                 tempref = tempref.getNextReference();
