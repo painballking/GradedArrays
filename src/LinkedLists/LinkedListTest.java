@@ -8,81 +8,76 @@ public class LinkedListTest {
     private static int index = 0;
     private static ArrayList<LinkedList> lists = new ArrayList<LinkedList>();
 
-    public static void printMainMenu(){
+    public static boolean mainMenu(LinkedList list){
+        System.out.println("       Main Menu");
+        System.out.println("-----------------------");
         System.out.println("1 - Insertion functions");
         System.out.println("2 - Removal functions");
         System.out.println("3 - Modifier functions");
         System.out.println("4 - Select working list");
         System.out.println("0 - Quit");
         System.out.println();
-    }
 
-    public static boolean mainMenu(int choice, LinkedList list){
+        int choice = getInt("");
         switch(choice){
             case 1:
-                printInsertMenu();
-                while(!insertMenu(getInt(false), list))
-                    printInsertMenu();
+                while(!insertMenu(list));
                 return true;
             case 2:
-                printRemoveMenu();
-                while(!removeMenu(getInt(false), list))
-                    printRemoveMenu();
+                while(!removeMenu(list));
                 return true;
             case 3:
-                printModifierMenu();
-                while(!modifierMenu(getInt(false), list))
-                    printModifierMenu();
+                while(!modifierMenu(list));
                 return true;
             case 4:
-                printSelectMenu();
-                while(!selectMenu(getInt(false)))
-                    printSelectMenu();
+                while(!selectMenu());
                 return true;
             case 0:
                 System.out.println("Exiting...");
                 return false;
             default:
-                System.out.println("Invalid entry. Try again.\n");
+                System.out.print("Invalid entry. Try again.\n\n");
                 return true;
         }
     }
 
-    public static void printInsertMenu(){
+    public static boolean insertMenu(LinkedList list){
+        System.out.println("      Insertion Menu");
+        System.out.println("-------------------------");
         System.out.println("1 - Insert at back");
         System.out.println("2 - Insert at front");
         System.out.println("3 - Insert based on value");
         System.out.println("0 - Back");
         System.out.println();
-    }
 
-    public static boolean insertMenu(int choice, LinkedList list){
+        int choice = getInt("");
         switch(choice){
             case 1:
-                list.insertAtBack(getInt(true));
+                list.insertAtBack(getInt("Value: "));
                 return true;
             case 2:
-                list.insertAtFront(getInt(true));
+                list.insertAtFront(getInt("Value: "));
                 return true;
             case 3:
-                list.insertionPlace(getInt(true));
+                list.insertionPlace(getInt("Value: "));
                 return true;
             case 0:
                 return true;
             default:
-                System.out.println("Invalid Entry. Try Again.\n");
+                System.out.print("Invalid Entry. Try Again.\n\n");
                 return false;
         }
     }
 
-    public static void printRemoveMenu(){
+    public static boolean removeMenu(LinkedList list){
+        System.out.println("    Removal Menu");
+        System.out.println("---------------------");
         System.out.println("1 - Remove from back");
         System.out.println("2 - Remove from front");
         System.out.println("0 - Back");
         System.out.println();
-    }
 
-    public static boolean removeMenu(int choice, LinkedList list){
+        int choice = getInt("");
         switch(choice){
             case 1:
                 list.removeFromBack();
@@ -98,15 +93,15 @@ public class LinkedListTest {
         }
     }
 
-
-    public static void printModifierMenu(){
+    public static boolean modifierMenu(LinkedList list){
+        System.out.println("    Modifier Menu");
+        System.out.println("--------------------");
         System.out.println("1 - Move max to back");
         System.out.println("2 - Bubble sort");
         System.out.println("0 - Back");
         System.out.println();
-    }
 
-    public static boolean modifierMenu(int choice, LinkedList list){
+        int choice = getInt("");
         switch(choice){
             case 1:
                 list.moveMax();
@@ -117,37 +112,37 @@ public class LinkedListTest {
             case 0:
                 return true;
             default:
-                System.out.println("Invalid entry. Try Again.\n");
+                System.out.print("Invalid entry. Try Again.\n\n");
                 return false;
         }
     }
 
-    public static void printSelectMenu(){
+    public static boolean selectMenu(){
+        System.out.println("    Selection Menu");
+        System.out.println("-----------------------");
         System.out.println("1 - Add new linked list");
         System.out.println("2 - Choose linked list");
         System.out.println("3 - Print lists");
         System.out.println("0 - Back");
         System.out.println();
-    }
 
-    public static boolean selectMenu(int choice){
+        int choice = getInt("");
         switch(choice){
             case 1:
+                System.out.println("Added list " + (lists.size()+1) + ". Current lists:");
                 lists.add(new LinkedList());
                 for(int i=0; i<lists.size(); i++){
                     System.out.print("List " + (i+1) + ": ");
                     lists.get(i).printList();
                 }
-                System.out.println();
                 return true;
             case 2:
+                System.out.println("Available Lists");
                 for(int i=0; i<lists.size(); i++){
                     System.out.print("List " + (i+1) + ": ");
                     lists.get(i).printList();
                 }
-                System.out.println();
-                System.out.print("Choice: ");
-                int newIndex = getInt(false);
+                int newIndex = getInt("Choice: ")-1;
                 if(newIndex >= 0 && newIndex < lists.size()){
                     index = newIndex;
                     return true;
@@ -169,16 +164,16 @@ public class LinkedListTest {
         }
     }
 
-    public static int getInt(boolean printOption){
-        if(printOption){
-            System.out.print("Value: ");
+    public static int getInt(String printOption){
+        if(!printOption.equals("")){
+            System.out.print(printOption);
         }
         boolean gotGoodValue = false;
         int choice = 0;
         while(!gotGoodValue) {
-            gotGoodValue = true;
             try {
                 choice = Integer.parseInt(new Scanner(System.in).nextLine());
+                gotGoodValue = true;
             } catch (Exception e) {
                 System.out.println("Integers only. Try again.\n");
                 gotGoodValue = false;
@@ -193,7 +188,6 @@ public class LinkedListTest {
         do{
             System.out.print("Current list: ");
             lists.get(index).printList();
-            printMainMenu();
-        } while(mainMenu(getInt(false), lists.get(index)));
+        } while(mainMenu(lists.get(index)));
     }
 }
