@@ -175,4 +175,14 @@ public class LinkedList {
             }
         }
     }
+
+    public int pop(){
+        int ret = this.head.getData();
+        this.removeFromFront();
+        return ret;
+    }
+
+    public int getFrontData(){
+        return this.head.getData();
+    }
 }

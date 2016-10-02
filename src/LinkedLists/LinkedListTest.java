@@ -23,18 +23,23 @@ public class LinkedListTest {
             case 1:
                 while(!insertMenu(list));
                 return true;
+
             case 2:
                 while(!removeMenu(list));
                 return true;
+
             case 3:
                 while(!modifierMenu(list));
                 return true;
+
             case 4:
                 while(!selectMenu());
                 return true;
+
             case 0:
                 System.out.println("Exiting...");
                 return false;
+
             default:
                 System.out.print("Invalid entry. Try again.\n\n");
                 return true;
@@ -55,14 +60,18 @@ public class LinkedListTest {
             case 1:
                 list.insertAtBack(getInt("Value: "));
                 return true;
+
             case 2:
                 list.insertAtFront(getInt("Value: "));
                 return true;
+
             case 3:
                 list.insertionPlace(getInt("Value: "));
                 return true;
+
             case 0:
                 return true;
+
             default:
                 System.out.print("Invalid Entry. Try Again.\n\n");
                 return false;
@@ -82,11 +91,14 @@ public class LinkedListTest {
             case 1:
                 list.removeFromBack();
                 return true;
+
             case 2:
                 list.removeFromFront();
                 return true;
+
             case 0:
                 return true;
+
             default:
                 System.out.println("Invalid Entry. Try Again.\n");
                 return false;
@@ -98,6 +110,7 @@ public class LinkedListTest {
         System.out.println("--------------------");
         System.out.println("1 - Move max to back");
         System.out.println("2 - Bubble sort");
+        System.out.println("3 - Merge lists");
         System.out.println("0 - Back");
         System.out.println();
 
@@ -106,11 +119,30 @@ public class LinkedListTest {
             case 1:
                 list.moveMax();
                 return true;
+
             case 2:
                 list.bubbleSort();
                 return true;
+
+            case 3:
+                System.out.println("Available Lists");
+                for(int i=0; i<lists.size(); i++){
+                    System.out.print("List " + (i+1) + ": ");
+                    lists.get(i).printList();
+                }
+                LinkedList list1 = lists.get((getInt("List 1: ")-1));
+                LinkedList list2 = lists.get((getInt("List 2: ")-1));
+                lists.remove(list1);
+                lists.remove(list2);
+                lists.add(merge(list1, list2));
+                System.out.println("\nNew list " + (lists.size()));
+                lists.get(lists.size()-1).printList();
+                index = lists.size()-1;
+                return true;
+
             case 0:
                 return true;
+
             default:
                 System.out.print("Invalid entry. Try Again.\n\n");
                 return false;
@@ -136,6 +168,7 @@ public class LinkedListTest {
                     lists.get(i).printList();
                 }
                 return true;
+
             case 2:
                 System.out.println("Available Lists");
                 for(int i=0; i<lists.size(); i++){
@@ -151,6 +184,7 @@ public class LinkedListTest {
                     System.out.println("List does not exist");
                     return false;
                 }
+
             case 3:
                 for(int i=0; i<lists.size(); i++){
                     System.out.print("List " + (i+1) + ": ");
@@ -158,6 +192,7 @@ public class LinkedListTest {
                 }
                 System.out.println();
                 return true;
+
             default:
                 System.out.println("Invalid entry. Try again.\n");
                 return false;
@@ -180,6 +215,26 @@ public class LinkedListTest {
             }
         }
         return choice;
+    }
+
+    public static LinkedList merge(LinkedList list1, LinkedList list2){
+        LinkedList ret = new LinkedList();
+
+        while(!list1.isEmpty() && !list2.isEmpty()){
+            if(list1.isEmpty()){
+                ret.insertAtBack(list2.pop());
+            }
+            else if(list2.isEmpty()){
+                ret.insertAtBack(list1.pop());
+            }
+            else if(list1.getFrontData() > list2.getFrontData()){
+                ret.insertAtBack(list2.pop());
+            }
+            else{
+                ret.insertAtBack(list1.pop());
+            }
+        }
+        return ret;
     }
 
     public static void main (String args []) {
