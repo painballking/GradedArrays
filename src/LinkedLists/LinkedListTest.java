@@ -6,9 +6,9 @@ import java.util.Scanner;
 public class LinkedListTest {
 
     private static int index = 0;
-    private static ArrayList<LinkedList> lists = new ArrayList<LinkedList>();
+    private static ArrayList<LinkedList> lists = new ArrayList<>();
 
-    public static boolean mainMenu(LinkedList list){
+    private static boolean mainMenu(LinkedList list){
         System.out.println("       Main Menu");
         System.out.println("-----------------------");
         System.out.println("1 - Insertion functions");
@@ -46,7 +46,7 @@ public class LinkedListTest {
         }
     }
 
-    public static boolean insertMenu(LinkedList list){
+    private static boolean insertMenu(LinkedList list){
         System.out.println("      Insertion Menu");
         System.out.println("-------------------------");
         System.out.println("1 - Insert at back");
@@ -78,7 +78,7 @@ public class LinkedListTest {
         }
     }
 
-    public static boolean removeMenu(LinkedList list){
+    private static boolean removeMenu(LinkedList list){
         System.out.println("    Removal Menu");
         System.out.println("---------------------");
         System.out.println("1 - Remove from back");
@@ -105,7 +105,7 @@ public class LinkedListTest {
         }
     }
 
-    public static boolean modifierMenu(LinkedList list){
+    private static boolean modifierMenu(LinkedList list){
         System.out.println("    Modifier Menu");
         System.out.println("--------------------");
         System.out.println("1 - Move max to back");
@@ -149,7 +149,7 @@ public class LinkedListTest {
         }
     }
 
-    public static boolean selectMenu(){
+    private static boolean selectMenu(){
         System.out.println("    Selection Menu");
         System.out.println("-----------------------");
         System.out.println("1 - Add new linked list");
@@ -199,7 +199,7 @@ public class LinkedListTest {
         }
     }
 
-    public static int getInt(String printOption){
+    private static int getInt(String printOption){
         if(!printOption.equals("")){
             System.out.print(printOption);
         }
@@ -217,7 +217,7 @@ public class LinkedListTest {
         return choice;
     }
 
-    public static LinkedList merge(LinkedList list1, LinkedList list2){
+    private static LinkedList merge(LinkedList list1, LinkedList list2){
         LinkedList ret = new LinkedList();
 
         while(!list1.isEmpty() && !list2.isEmpty()){
