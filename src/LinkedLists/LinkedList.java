@@ -28,7 +28,6 @@ public class LinkedList {
         else {
             Node tempref = head;
 
-            System.out.print("Linked List so far: ");
             while (tempref != null) {
                 System.out.print(tempref.getData());
                 tempref = tempref.getNextReference();

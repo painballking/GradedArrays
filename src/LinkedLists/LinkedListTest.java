@@ -35,6 +35,9 @@ public class LinkedListTest {
                     printModifierMenu();
                 return true;
             case 4:
+                printSelectMenu();
+                while(!selectMenu(getInt(false)))
+                    printSelectMenu();
                 return true;
             case 0:
                 System.out.println("Exiting...");
@@ -131,9 +134,38 @@ public class LinkedListTest {
         switch(choice){
             case 1:
                 lists.add(new LinkedList());
+                for(int i=0; i<lists.size(); i++){
+                    System.out.print("List " + (i+1) + ": ");
+                    lists.get(i).printList();
+                }
+                System.out.println();
                 return true;
             case 2:
-
+                for(int i=0; i<lists.size(); i++){
+                    System.out.print("List " + (i+1) + ": ");
+                    lists.get(i).printList();
+                }
+                System.out.println();
+                System.out.print("Choice: ");
+                int newIndex = getInt(false);
+                if(newIndex >= 0 && newIndex < lists.size()){
+                    index = newIndex;
+                    return true;
+                }
+                else{
+                    System.out.println("List does not exist");
+                    return false;
+                }
+            case 3:
+                for(int i=0; i<lists.size(); i++){
+                    System.out.print("List " + (i+1) + ": ");
+                    lists.get(i).printList();
+                }
+                System.out.println();
+                return true;
+            default:
+                System.out.println("Invalid entry. Try again.\n");
+                return false;
         }
     }
 
@@ -159,6 +191,7 @@ public class LinkedListTest {
         lists.add(new LinkedList());
 
         do{
+            System.out.print("Current list: ");
             lists.get(index).printList();
             printMainMenu();
         } while(mainMenu(getInt(false), lists.get(index)));
