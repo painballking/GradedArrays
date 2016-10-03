@@ -220,7 +220,7 @@ public class LinkedListTest {
     private static LinkedList merge(LinkedList list1, LinkedList list2){
         LinkedList ret = new LinkedList();
 
-        while(!list1.isEmpty() && !list2.isEmpty()){
+        while(!list1.isEmpty() || !list2.isEmpty()){
             if(list1.isEmpty()){
                 ret.insertAtBack(list2.pop());
             }
