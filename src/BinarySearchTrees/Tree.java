@@ -63,6 +63,24 @@ public class Tree {
         }
     }
 
+    public int getMaxValLevel(Node node){
+        if(node.getRightNodeReference() == null){
+            return 1;
+        }
+        else{
+            return 1 + getMaxValLevel(node.getRightNodeReference());
+        }
+    }
+
+    public int getMinValLevel(Node node){
+        if(node.getLeftNodeReference() == null){
+            return 1;
+        }
+        else{
+            return 1 + getMinValLevel(node.getLeftNodeReference());
+        }
+    }
+
     public void getMaximumValue(Node node) {
         if (node.getRightNodeReference() == null) {
             System.out.println(node.getData());
@@ -139,8 +157,16 @@ public class Tree {
         }
     }
 
-    public boolean isComplete(Node node){
-
+    public boolean isComplete(Node node, int value, int current){
+        if (current == value) {
+            return true;
+        }
+        else if(current < value && (node.getLeftNodeReference() == null && node.getRightNodeReference() != null)){
+            return false;
+        }
+        else{
+            return (isComplete(node.getRightNodeReference(), value, current+1) &&
+                    isComplete(node.getLeftNodeReference(), value, current+1));
+        }
     }
-
 }
