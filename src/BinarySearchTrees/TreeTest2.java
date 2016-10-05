@@ -72,7 +72,7 @@ public class TreeTest2 {
                     System.out.println("The Tree is Empty");
                 }
                 else{
-                    System.out.println(tree.isComplete(tree.getRoot(), 1));
+                    System.out.println(tree.isComplete(tree.getRoot(), tree.getMinValLevel(tree.getRoot()), 1));
                 }
             } else if (choice == 5) {
                 System.out.println(tree.getMinValLevel(tree.getRoot()));

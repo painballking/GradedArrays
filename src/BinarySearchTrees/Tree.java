@@ -164,6 +164,9 @@ public class Tree {
         else if(current < value && (node.getLeftNodeReference() == null && node.getRightNodeReference() != null)){
             return false;
         }
+        else if(current < value && (node.getLeftNodeReference() != null && node.getRightNodeReference() == null)){
+            return isComplete(node.getLeftNodeReference(), value, current+1);
+        }
         else{
             return (isComplete(node.getRightNodeReference(), value, current+1) &&
                     isComplete(node.getLeftNodeReference(), value, current+1));
