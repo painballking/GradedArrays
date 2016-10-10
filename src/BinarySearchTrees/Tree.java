@@ -1,5 +1,7 @@
 package BinarySearchTrees;
 
+import java.util.List;
+
 public class Tree {
     private Node root;
 
@@ -18,7 +20,6 @@ public class Tree {
             return false;
         }
     }
-
 
     public void insert(int value, Node x) {
         if (x == null) {
@@ -157,16 +158,6 @@ public class Tree {
         }
     }
 
-    public boolean isComplete(Node node, int value, int current){
-        if (current == value) {
-            return true;
-        }
-        else if(current < value && (node.getLeftNodeReference() == null && node.getRightNodeReference() != null)){
-            return false;
-        }
-        else{
-            return (isComplete(node.getRightNodeReference(), value, current+1) &&
-                    isComplete(node.getLeftNodeReference(), value, current+1));
-        }
-    }
+    public boolean isComplete
 }
+
