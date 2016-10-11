@@ -1,5 +1,6 @@
 package BinarySearchTrees;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tree {
@@ -158,6 +159,59 @@ public class Tree {
         }
     }
 
-    public boolean isComplete
+    public boolean hasChildren(Node node){
+        return (node.getLeftNodeReference() != null || node.getRightNodeReference() != null);
+    }
+
+    public boolean isComplete(Node node){
+        List<Node> list = new ArrayList<>();
+
+        list.add(node);
+        while(!list.contains(null)){
+            int max = list.size();
+            for(int i=0; i<max; i++){
+                list.add(list.get(i).getLeftNodeReference());
+                list.add(list.get(i).getRightNodeReference());
+            }
+            for(int i=0; i<max; i++){
+                list.remove(0);
+            }
+            boolean flag = false;
+            for(int i=0; i<list.size(); i++){
+                if(flag && list.get(i) != null){
+                    return false;
+                }
+                else if(list.get(i) == null){
+                    flag = true;
+                }
+            }
+        }
+        for(int i=0; i<list.size(); i++){
+            if(list.get(i) != null && hasChildren(list.get(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int highestCostPath(Node node){
+        if(!hasChildren(node)){
+            return node.getData();
+        }
+        else if(node.getRightNodeReference() == null){
+            return node.getData() + highestCostPath(node.getLeftNodeReference());
+        }
+        else if(node.getLeftNodeReference() == null){
+            return node.getData() + highestCostPath(node.getRightNodeReference());
+        }
+        else{
+            return node.getData() + Math.max(highestCostPath(node.getLeftNodeReference()),
+                                                highestCostPath(node.getRightNodeReference()));
+        }
+    }
+
+    public int longestPath(Node node){
+        return 0;
+    }
 }
 

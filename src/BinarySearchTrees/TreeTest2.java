@@ -11,6 +11,7 @@ public class TreeTest2 {
         System.out.println("10- Input Stream; -1 to stop");
         System.out.println("2 - Print the Tree");
         System.out.println("3 - Print path to value");
+        System.out.println("4 - Most Expensive path");
 
         System.out.println("0 - Quit");
     }
@@ -77,7 +78,11 @@ public class TreeTest2 {
                 }
             }
             else if(choice == 4){
-                System.out.println(tree.longestPath(tree.getRoot()));
+                System.out.println(
+            }
+            else if(choice == 5){
+                tree = new Tree();
+                System.out.println("Tree reset");
             }
 
             else {
