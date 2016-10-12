@@ -11,7 +11,7 @@ public class TreeTest2 {
         System.out.println("10- Input Stream; -1 to stop");
         System.out.println("2 - Print the Tree");
         System.out.println("3 - Print path to value");
-        System.out.println("4 - Most Expensive path");
+        System.out.println("4 - Most longest path");
 
         System.out.println("0 - Quit");
     }
@@ -78,7 +78,9 @@ public class TreeTest2 {
                 }
             }
             else if(choice == 4){
-                System.out.println(
+                System.out.println ("Input Value");
+                int value = scanner1.nextInt();
+                tree.distinctTrees(value);
             }
             else if(choice == 5){
                 tree = new Tree();

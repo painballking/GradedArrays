@@ -1,7 +1,10 @@
 package BinarySearchTrees;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Tree {
     private Node root;
@@ -211,7 +214,43 @@ public class Tree {
     }
 
     public int longestPath(Node node){
-        return 0;
+        Queue<Node> q = new LinkedList();
+        q.add(node);
+
+        int max = -1;
+
+        while(q.peek() != null){
+            Node working = q.element();
+
+            if(working.getLeftNodeReference() == null){
+                int temp = 1 + treeHeight(working.getRightNodeReference());
+                max = temp > max ? temp : max;
+                q.add(working.getRightNodeReference());
+            }
+            else if(working.getRightNodeReference() == null){
+                int temp = 1 + treeHeight(working.getLeftNodeReference());
+                max = temp > max ? temp : max;
+                q.add(working.getLeftNodeReference());
+            }
+            else{
+                int temp = 1 +  treeHeight(working.getLeftNodeReference()) +
+                                treeHeight(working.getRightNodeReference());
+                max = temp > max ? temp : max;
+                q.add(working.getRightNodeReference());
+                q.add(working.getLeftNodeReference());
+            }
+            q.poll();
+        }
+        return max;
+    }
+
+    public int[] nextPerm(int[] array){
+
+    }
+
+    public void distinctTrees(int n){
+        Array array = new Array();
+
     }
 }
 
