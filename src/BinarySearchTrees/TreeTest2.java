@@ -11,7 +11,7 @@ public class TreeTest2 {
         System.out.println("10- Input Stream; -1 to stop");
         System.out.println("2 - Print the Tree");
         System.out.println("3 - Print path to value");
-        System.out.println("4 - Most longest path");
+        System.out.println("4 - Distinct trees");
 
         System.out.println("0 - Quit");
     }

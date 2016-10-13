@@ -1,10 +1,6 @@
 package BinarySearchTrees;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class Tree {
     private Node root;
@@ -245,12 +241,30 @@ public class Tree {
     }
 
     public int[] nextPerm(int[] array){
-
+        for(int k=array.length - 2; k >= 0; k--){
+            if(array[k] < array[k+1]){
+                for(int i=array.length - 1; i > k; i--){
+                    if(array[k] < array[i]){
+                        int store = array[i];
+                        array[i] = array[k];
+                        array[k] = store;
+                        //for(int j=1;);
+                    }
+                }
+            }
+        }
+        return array;
     }
 
     public void distinctTrees(int n){
-        Array array = new Array();
-
+        int[] array = new int[n];
+        for(int i=0; i<n; i++){
+            array[i] = i;
+        }
+        do{
+            System.out.println(Arrays.toString(array));
+            array = nextPerm(array);
+        }while(array != nextPerm(array));
     }
 }
 

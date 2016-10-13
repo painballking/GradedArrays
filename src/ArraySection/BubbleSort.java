@@ -1,4 +1,4 @@
-package Arrays;
+package ArraySection;
 
 public class BubbleSort {
     public static void main(String args[]) {
