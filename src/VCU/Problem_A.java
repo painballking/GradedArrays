@@ -9,9 +9,8 @@ public class Problem_A {
         for(int i=0; i<p1.length; i++){
             sum += Math.pow(p1[i]-p2[i], 2);
         }
-        return Math.sqrt(sum);
+        return sum;
     }
-
 
     public static void main(String args[]) {
         Scanner input = new Scanner(System.in);
@@ -49,10 +48,6 @@ public class Problem_A {
                 }
             });
 
-            for(int j=0; j<stableSort.length; j++){
-                System.out.println(classes[j] + " " + distances[j]);
-            }
-
             PriorityQueue<double[]> queue = new PriorityQueue<>(new Comparator<double[]>(){
                 public int compare(double[] d1, double[] d2){
                     return Double.compare(d1[1], d2[1]);
@@ -60,7 +55,7 @@ public class Problem_A {
             });
 
             for(int j=0; j<classes.length; j++){
-                double[] in = {classes[j], distances[j]};
+                double[] in = {classes[stableSort[j]], distances[stableSort[j]]};
                 queue.add(in);
             }
             System.out.println((int)queue.poll()[0]);
