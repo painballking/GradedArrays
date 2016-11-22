@@ -1,8 +1,6 @@
 package VCU;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class Problem_A {
 
@@ -17,11 +15,11 @@ public class Problem_A {
 
     public static void main(String args[]) {
         Scanner input = new Scanner(System.in);
-        String[] what = input.nextLine().split(" ");
-        int X = Integer.parseInt(what[0]);
-        int Y = Integer.parseInt(what[1]);
-        int Z = Integer.parseInt(what[2]);
-        int K = Integer.parseInt(what[3]);
+        String[] parameters = input.nextLine().split(" ");
+        int X = Integer.parseInt(parameters[0]);
+        int Y = Integer.parseInt(parameters[1]);
+        int Z = Integer.parseInt(parameters[2]);
+        int K = Integer.parseInt(parameters[3]);
 
         double[][] points = new double[X+Z][Y+1];
         for(int i=0; i<X+Z; i++){
@@ -33,18 +31,25 @@ public class Problem_A {
                 points[i][Y] = Double.parseDouble(line[line.length-1]);
             }
         }
-        double[][] distances = new double[Z][X];
-        HashMap[] map = new HashMap[Z];
+
         for(int i=0; i<Z; i++) {
+
+            int[] classes = new int[X];
+            double[] distances = new double[X];
             for (int j = 0; j < X; j++) {
-                distances[i][j] = distance(points[X + i], points[j]);
+                distances[i] = distance(points[X + i], points[j]);
+                classes[i] = (int)points[j][Y];
             }
-            Arrays.sort(distances[i]);
-            for(int j=0; j<K; j++){
-                if(map[i].get(distances[j][Y]) != null){
-                    map[i]
+
+            Integer[] stableSort = new Integer[X];
+            for(int x=0; x<stableSort.length; x++) stableSort[x] = x;
+            Arrays.sort(stableSort, new Comparator<Integer>(){
+                public int compare(Integer i1, Integer i2){
+                    return Double.compare(distances[i1], distances[i2]);
                 }
-            }
+            });
+
+
         }
     }
 }
