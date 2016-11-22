@@ -14,9 +14,6 @@ public class BubbleSort {
                     array[i] = array[i+1];
                     array[i+1] = store;
                     swapped = true;
-                    for(int x:array)
-                        System.out.print(x+" ");
-                    System.out.println();
                 }
             }
         }

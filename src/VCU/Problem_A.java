@@ -37,8 +37,8 @@ public class Problem_A {
             int[] classes = new int[X];
             double[] distances = new double[X];
             for (int j = 0; j < X; j++) {
-                distances[i] = distance(points[X + i], points[j]);
-                classes[i] = (int)points[j][Y];
+                distances[j] = distance(points[X + i], points[j]);
+                classes[j] = (int)points[j][Y];
             }
 
             Integer[] stableSort = new Integer[X];
@@ -49,7 +49,19 @@ public class Problem_A {
                 }
             });
 
-
+            Map<Integer, Integer> map = new TreeMap<>();
+            int[] topClass = new int[2];
+            for(int j=0; j<K; j++){
+                if(map.containsKey(classes[j])) {
+                    map.replace(classes[j], map.get(classes[j]) + 1);
+                }
+                else {
+                    map.put(classes[j], 1);
+                }
+            }
+            for(Map.Entry<Integer, Integer> kek : map.entrySet()){
+                System.out.println(kek.getKey());
+            }
         }
     }
 }
