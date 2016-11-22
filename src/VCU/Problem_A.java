@@ -34,34 +34,36 @@ public class Problem_A {
 
         for(int i=0; i<Z; i++) {
 
-            int[] classes = new int[X];
+            double[] classes = new double[X];
             double[] distances = new double[X];
             for (int j = 0; j < X; j++) {
                 distances[j] = distance(points[X + i], points[j]);
-                classes[j] = (int)points[j][Y];
+                classes[j] = points[j][Y];
             }
 
             Integer[] stableSort = new Integer[X];
             for(int x=0; x<stableSort.length; x++) stableSort[x] = x;
             Arrays.sort(stableSort, new Comparator<Integer>(){
                 public int compare(Integer i1, Integer i2){
-                    return Double.compare(distances[i1], distances[i2]);
+                    return Double.compare(classes[i1], classes[i2]);
                 }
             });
 
-            Map<Integer, Integer> map = new TreeMap<>();
-            int[] topClass = new int[2];
-            for(int j=0; j<K; j++){
-                if(map.containsKey(classes[j])) {
-                    map.replace(classes[j], map.get(classes[j]) + 1);
-                }
-                else {
-                    map.put(classes[j], 1);
-                }
+            for(int j=0; j<stableSort.length; j++){
+                System.out.println(classes[j] + " " + distances[j]);
             }
-            for(Map.Entry<Integer, Integer> kek : map.entrySet()){
-                System.out.println(kek.getKey());
+
+            PriorityQueue<double[]> queue = new PriorityQueue<>(new Comparator<double[]>(){
+                public int compare(double[] d1, double[] d2){
+                    return Double.compare(d1[1], d2[1]);
+                }
+            });
+
+            for(int j=0; j<classes.length; j++){
+                double[] in = {classes[j], distances[j]};
+                queue.add(in);
             }
+            System.out.println((int)queue.poll()[0]);
         }
     }
 }
