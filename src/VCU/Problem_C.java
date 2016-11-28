@@ -12,10 +12,14 @@ public class Problem_C {
         int vF = input.nextInt();
 
         int dist = 0;
-        int[] distances = new int[vertices];
-        for(int i : distances)
-            i = Integer.MAX_VALUE;
-        List<HashMap<Integer, Integer>> map = new ArrayList<HashMap<Integer, Integer>>();
-
+        double[] distances = new double[vertices];
+        List<HashMap<Integer, Double>> listMap = new ArrayList<HashMap<Integer, Double>>();
+        for(double i : distances) {
+            i = Double.POSITIVE_INFINITY;
+            listMap.add(new HashMap<>());
+        }
+        for(int i=0; i<5; i++){
+            String[] shit = input.nextLine().split(" ");
+        }
     }
 }
