@@ -1,16 +1,17 @@
 package BinaryHeaps;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class BinaryHeap {
 
     public static class Heap{
 
-        List<Integer> heap;
+        private List<Integer> heap;
 
-        public Heap(){
-            heap = new ArrayList<Integer>();
-        }
+        public Heap(){ heap = new ArrayList<>(); }
 
         public void insert(int value){
             heap.add(value);
@@ -26,14 +27,25 @@ public class BinaryHeap {
         public void print(){
             System.out.println(Arrays.toString(heap.toArray()));
         }
+
+        public int pop(){
+            int temp = heap.get(0);
+            heap.set(0, heap.get(heap.size()-1));
+            heap.remove(heap.size()-1);
+            return temp;
+        }
     }
 
     public static void main(String args[]){
         int[] array = {2,4,11,15,16,18};
-        Heap heap = new Heap();
+        Heap myHeap = new Heap();
         for(int i:array){
-            heap.insert(i);
+            myHeap.insert(i);
         }
-        heap.print();
+        myHeap.print();
+        myHeap.insert(7);
+        myHeap.print();
+        myHeap.insert(12);
+        myHeap.print();
     }
 }
