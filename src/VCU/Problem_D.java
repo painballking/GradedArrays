@@ -59,6 +59,5 @@ public class Problem_D {
             }
             System.out.print(flag ? "0" : "1");
         }
-
     }
 }
