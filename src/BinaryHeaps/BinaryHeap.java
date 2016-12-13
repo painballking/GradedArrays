@@ -7,24 +7,27 @@ import java.util.List;
 public class BinaryHeap {
 
     public static int[] heapify(int[] array) {
-        for (int i = (array.length - 1) / 2; i >= 0; i--) {
-            if ((i + 1) * 2 >= array.length || i * 2 + 1 >= array.length) {
-                if ((i + 1) * 2 >= array.length && array[i * 2 + 1] < array[i]) {
-                    int store = array[i * 2 + 1];
-                    array[i * 2 + 1] = array[i];
-                    array[i] = store;
-                } else if (i * 2 + 1 >= array.length && array[(i * 2) + 1] < array[i]) {
-                    int store = array[(i + 1) * 2];
-                    array[(i + 1) * 2] = array[i];
-                    array[i] = store;
+        for (int parent = (array.length - 1) / 2; parent >= 0; parent--) {
+
+            int leftChild = (parent+1)*2;
+            int rightChild = parent*2+1;
+
+            if (leftChild >= array.length || rightChild >= array.length) {
+                if (leftChild >= array.length && array[rightChild] < array[parent]) {
+                    int store = array[rightChild];
+                    array[rightChild] = array[parent];
+                    array[parent] = store;
+                } else if (rightChild >= array.length && array[leftChild] < array[parent]) {
+                    int store = array[leftChild];
+                    array[leftChild] = array[parent];
+                    array[parent] = store;
                 }
-                break;
             } else {
-                if (array[(i + 1) * 2] < array[i] || array[i * 2 + 1] < array[i]) {
-                    int child = array[(i + 1) * 2] < array[i * 2 + 1] ? (i + 1) * 2 : i * 2 + 1;
+                if (array[leftChild] < array[parent] || array[rightChild] < array[parent]) {
+                    int child = array[leftChild] < array[rightChild] ? leftChild : rightChild;
                     int store = array[child];
-                    array[child] = array[i];
-                    array[i] = store;
+                    array[child] = array[parent];
+                    array[parent] = store;
                 }
             }
         }
@@ -41,7 +44,7 @@ public class BinaryHeap {
         myHeap.print();
     }
 
-    public static class Heap {
+    static class Heap {
 
         private ArrayList<Integer> heap;
 
