@@ -4,13 +4,13 @@ import java.util.Arrays;
 
 public class QuickSort {
 
-    public static void partition(int[] array, int a, int b){
+    public static int partition(int[] array, int a, int b){
 
         int p = array[a];
-        int i = 1;
-        int j= array.length-1;
+        int i = a+1;
+        int j = b;
 
-        while(i >= j){
+        while(i <= j){
             if(array[i] > p && array[j] < p){
                 int store = array[i];
                 array[i] = array[j]; array[j] = store;
@@ -23,11 +23,23 @@ public class QuickSort {
                 j--;
             }
         }
-        array
+        int store = array[j];
+        array[j] = array[a];
+        array[a] = store;
+        return j;
+    }
+
+    public static void quicksort(int[] array, int a, int b){
+        if(a < b) {
+            int p = partition(array, a, b);
+            quicksort(array, a, p-1);
+            quicksort(array, p+1, b);
+        }
     }
 
     public static void main(String args[]) {
-        int[] test = {1, 2, 3, 4, 5};
-        partition(test);
+        int[] test = {3, 5, 2, 7, 4, 1};
+        quicksort(test, 0, test.length-1);
+        System.out.println(Arrays.toString(test));
     }
 }
