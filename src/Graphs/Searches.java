@@ -1,6 +1,8 @@
 package Graphs;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Searches {
@@ -31,14 +33,29 @@ public class Searches {
                 depthFirstSearch(V);
     }
 
-    public static void breadthFirstSearch(Vertex v, Queue<Vertex> q){
-        System.out.println("Found: " + v.getName());
+    public static void breadthFirstSearch(Vertex v){
+        Queue<Vertex> q = new LinkedList<>();
+        List<String> visited = new ArrayList<>();
+        q.add(v);
+
+        while(q.size() > 0){
+            System.out.println("Found: " + q.peek().getName());
+            visited.add(q.peek().getName());
+
+            for(Vertex V : q.peek().getNeighbors()){
+                if(!visited.contains(V.getName())){
+                    q.add(V);
+                    visited.add(V.getName());
+                }
+            }
+            q.poll();
+        }
 
 
     }
 
     public static void main(String args[]) {
         ArrayList<Vertex> graph = buildGraph();
-
+        breadthFirstSearch(graph.get(0));
     }
 }
