@@ -6,16 +6,12 @@ public class Vertex {
 
     private boolean visited;
     private int Distance;
+    private String Name;
     private ArrayList<Vertex> Neighbors;
 
-    public Vertex() {
+    public Vertex(String n) {
+        Name = n;
         Distance = 0;
-        Neighbors = new ArrayList<Vertex>();
-        visited = false;
-    }
-
-    public Vertex(int d) {
-        Distance = d;
         Neighbors = new ArrayList<Vertex>();
         visited = false;
     }
@@ -31,6 +27,9 @@ public class Vertex {
     public void addNeighbor(Vertex v) {
         Neighbors.add(v);
     }
+
+    public String getName(){ return Name; }
+    public void setName(String n) { Name = n; }
 
     public boolean isVisited() { return visited; }
 
