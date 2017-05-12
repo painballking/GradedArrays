@@ -3,33 +3,33 @@ package Huffman;
 public class Tree {
     private Node root;
 
-    public Tree(int frequency, char character) {
-        root = new Node(frequency, character);
+    public Tree(int frequency, String string) {
+        root = new Node(frequency, string);
     }
 
-    public void insert(int frequency, char character, Node x) {
+    public void insert(int frequency, String string, Node x) {
         if (x == null) {
-            root = new Node(frequency, character);
+            root = new Node(frequency, string);
         } else {
             if (frequency < x.getFrequency()) {
                 if (x.getLeftNodeReference() == null) {
-                    Node y = new Node(frequency, character);
+                    Node y = new Node(frequency, string);
                     x.setLeftNodeReference(y);
                 } else {
-                    insert(frequency, character, x.getLeftNodeReference());
+                    insert(frequency, string, x.getLeftNodeReference());
                 }
             } else {
                 if (x.getRightNodeReference() == null) {
-                    Node y = new Node(frequency, character);
+                    Node y = new Node(frequency, string);
                     x.setRightNodeReference(y);
                 } else {
-                    insert(frequency, character, x.getRightNodeReference());
+                    insert(frequency, string, x.getRightNodeReference());
                 }
             }
         }
     }
 
-    public void outputTree(Node currentNode, int spaces) {
+    public static void outputTree(Node currentNode, int spaces) {
         if (currentNode == null) {
             return;
         } else {
@@ -37,7 +37,7 @@ public class Tree {
             for (int k = 1; k <= spaces; k++) {
                 System.out.print(" ");
             }
-            System.out.println(currentNode.getCharacter() + ": " + currentNode.getFrequency());
+            System.out.println(currentNode.getString() + ": " + currentNode.getFrequency());
             outputTree(currentNode.getLeftNodeReference(), spaces + 5);
         }
     }

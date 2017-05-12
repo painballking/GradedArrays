@@ -5,11 +5,11 @@ public class Node {
     private Node leftNode;
     private Node rightNode;
     private int frequency;
-    private char character;
+    private String string;
 
-    public Node(int f, char c) {
+    public Node(int f, String s) {
         frequency = f;
-        character = c;
+        string = s;
     }
 
     public Node getRightNodeReference() {
@@ -28,7 +28,23 @@ public class Node {
     public int getFrequency() {
         return frequency;
     }
-    public char getCharacter() {
-        return character;
+    public String getString() {
+        return string;
+    }
+
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
+    }
+
+    public void setString(String string) {
+        this.string = string;
+    }
+
+    public void addToString(String s) {
+        this.string += s;
+    }
+
+    public void addToFrequency(int f) {
+        this.frequency += f;
     }
 }
