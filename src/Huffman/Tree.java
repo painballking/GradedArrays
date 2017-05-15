@@ -6,6 +6,9 @@ public class Tree {
     public Tree(int frequency, String string) {
         root = new Node(frequency, string);
     }
+    public Tree(Node root) {
+        this.root = root;
+    }
 
     public void insert(int frequency, String string, Node x) {
         if (x == null) {

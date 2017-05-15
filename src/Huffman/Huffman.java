@@ -4,11 +4,15 @@ import java.util.*;
 
 public class Huffman {
 
-    private static Tree tree;
-    private static Map<String, Integer> table;
-    private static Map<String, String> codes;
+    private Map<String, Integer> table;
+    private Map<String, String> codes;
 
-    public static void makeTable(String s) {
+    public Huffman() {
+        table = new HashMap<>();
+        codes = new HashMap<>();
+    }
+
+    private void makeTable(String s) {
 
         table = new HashMap<>();
         for (int i = 0; i < s.length(); i++) {
@@ -16,7 +20,7 @@ public class Huffman {
         }
     }
 
-    public static void incrementItem(String s) {
+    private void incrementItem(String s) {
 
         if (table.containsKey(s)) {
             table.put(s, table.get(s) + 1);
@@ -25,7 +29,7 @@ public class Huffman {
         }
     }
 
-    public static String encode(String s) {
+    public String encode(String s) {
 
         Queue<Node> queue = new PriorityQueue<Node>((x, y) -> x.getFrequency() - y.getFrequency());
 
@@ -36,12 +40,11 @@ public class Huffman {
             makeTrees(queue);
         }
 
-        Node tree = queue.poll();
-        Tree.outputTree(tree, 5);
-        codes = new HashMap<>();
-        for (int i = 0; i < tree.getString().length(); i++) {
-            String curString = tree.getString().substring(i, i + 1);
-            codes.put(curString, generateCode(curString, tree, new StringBuilder()));
+        Node daBestTree = queue.poll();
+
+        for (int i = 0; i < daBestTree.getString().length(); i++) {
+            String curString = daBestTree.getString().substring(i, i + 1);
+            codes.put(curString, generateCode(curString, daBestTree, new StringBuilder()));
         }
 
         StringBuilder encoded = new StringBuilder();
@@ -53,7 +56,11 @@ public class Huffman {
         return encoded.toString();
     }
 
-    public static String generateCode(String s, Node t, StringBuilder c) {
+    public String decode() {
+
+    }
+
+    private String generateCode(String s, Node t, StringBuilder c) {
         if ( !t.getString().equals(s) ) {
             if (t.getLeftNodeReference() != null && t.getLeftNodeReference().getString().contains(s)) {
                 c.append("0");
@@ -66,7 +73,7 @@ public class Huffman {
         return c.toString();
     }
 
-    private static void makeTrees(Queue<Node> q) {
+    private void makeTrees(Queue<Node> q) {
 
         //Make a new root
         Node temp = new Node(getNextFrequency(q), getNextString(q));
@@ -81,20 +88,28 @@ public class Huffman {
         q.add(temp);
     }
 
-    private static int getNextFrequency(Queue<Node> q) {
+    private int getNextFrequency(Queue<Node> q) {
 
         return q.peek().getFrequency();
     }
 
-    private static String getNextString(Queue<Node> q) {
+    private String getNextString(Queue<Node> q) {
 
         return q.peek().getString();
     }
 
-    public static void main(String[] args) {
+    public void printTable() {
+        codes.forEach((k, v) -> System.out.printf("%s: %s\n", k, v));
+    }
 
-        String code = encode("who are you");
-        System.out.println(code);
-        System.out.printf("%d (%d bytes + %d bits)\n", code.length(), code.length() / 8, code.length() % 8);
+    public void calculateDecoderBits() {
+        int characters = table.size()*8;
+        int codeLen = 0;
+        for (Map.Entry<String, String> entry : codes.entrySet()) {
+            codeLen += entry.getValue().length();
+        }
+
+        int total = (table.size() - 1) * 8 + characters + codeLen;
+        System.out.printf("%s bits\n", total);
     }
 }
