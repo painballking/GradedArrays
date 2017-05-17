@@ -25,6 +25,7 @@ public class Chromosome {
 
     public float evaluate() {
 
+        //Parse chromosme data
         List<String> sequence = new ArrayList<>();
         boolean getInt = true;
         for (int i = 0; i < CHROMOSOME_SIZE; i+= 4) {
@@ -59,10 +60,7 @@ public class Chromosome {
             sequence.remove(sequence.size() - 1);
         }
 
-        for (int i = 0; i < sequence.size(); i++) {
-            System.out.print(sequence.get(i) + " ");
-        }
-
+        //Evaluate multiplication and division
         for (int i = 0; i < sequence.size(); i++) {
             String cur = sequence.get(i);
 
@@ -83,6 +81,8 @@ public class Chromosome {
 
             }
         }
+
+        // Evaluate addition and subtraction
         for (int i = 0; i < sequence.size(); i++) {
             String cur = sequence.get(i);
 
