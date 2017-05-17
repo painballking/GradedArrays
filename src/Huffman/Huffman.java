@@ -57,7 +57,7 @@ public class Huffman {
     }
 
     public String decode() {
-
+        return "";
     }
 
     private String generateCode(String s, Node t, StringBuilder c) {
