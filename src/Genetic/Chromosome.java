@@ -66,14 +66,14 @@ public class Chromosome {
 
             if ("*/".contains(cur)) {
 
-                String operand2 = sequence.remove(i + 1);
-                String operand1 = sequence.remove(i - 1);
+                Float operand2 = getVal(sequence.remove(i + 1));
+                Float operand1 = getVal(sequence.remove(i - 1));
 
                 float result;
                 if (cur.equals("*")) {
-                    result = getVal(operand1) * getVal(operand2);
+                    result = operand1 + operand2;
                 } else {
-                    result = getVal(operand1) / getVal(operand2);
+                    result = operand1 - operand2;
                 }
 
                 sequence.set(i - 1, Float.toString(result));
@@ -87,14 +87,14 @@ public class Chromosome {
             String cur = sequence.get(i);
 
             if ("+-".contains(cur)) {
-                String operand2 = sequence.remove(i + 1);
-                String operand1 = sequence.remove(i - 1);
+                Float operand2 = getVal(sequence.remove(i + 1));
+                Float operand1 = getVal(sequence.remove(i - 1));
 
                 float result;
                 if (cur.equals("+")) {
-                    result = getVal(operand1) + getVal(operand2);
+                    result = operand1 + operand2;
                 } else {
-                    result = getVal(operand1) - getVal(operand2);
+                    result = operand1 - operand2;
                 }
 
                 sequence.set(i - 1, Float.toString(result));
