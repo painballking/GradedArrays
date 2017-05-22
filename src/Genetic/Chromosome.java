@@ -1,15 +1,17 @@
 package Genetic;
 
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.List;
 
 public class Chromosome {
 
     private final static int CHROMOSOME_SIZE = 36;
     private String chromosome;
+    private float fitness;
 
-    public Chromosome() {
+    public Chromosome(){}
+
+    public void init() {
 
         StringBuilder temp = new StringBuilder(CHROMOSOME_SIZE);
         for (int i = 0; i < CHROMOSOME_SIZE; i++) {
@@ -23,12 +25,20 @@ public class Chromosome {
         chromosome = temp.toString();
     }
 
+    public float getFitness() {
+        return fitness;
+    }
+
+    public void update(float target) {
+        fitness = 1 / (target - evaluate());
+    }
+
     public float evaluate() {
 
         //Parse chromosme data
         List<String> sequence = new ArrayList<>();
         boolean getInt = true;
-        for (int i = 0; i < CHROMOSOME_SIZE; i+= 4) {
+        for (int i = 0; i < chromosome.length(); i+= 4) {
 
             String gene = chromosome.substring(i, i+4);
 
@@ -66,8 +76,8 @@ public class Chromosome {
 
             if ("*/".contains(cur)) {
 
-                Float operand2 = getVal(sequence.remove(i + 1));
-                Float operand1 = getVal(sequence.remove(i - 1));
+                float operand2 = getVal(sequence.remove(i + 1));
+                float operand1 = getVal(sequence.remove(i - 1));
 
                 float result;
                 if (cur.equals("*")) {
@@ -87,8 +97,8 @@ public class Chromosome {
             String cur = sequence.get(i);
 
             if ("+-".contains(cur)) {
-                Float operand2 = getVal(sequence.remove(i + 1));
-                Float operand1 = getVal(sequence.remove(i - 1));
+                float operand2 = getVal(sequence.remove(i + 1));
+                float operand1 = getVal(sequence.remove(i - 1));
 
                 float result;
                 if (cur.equals("+")) {
@@ -110,7 +120,7 @@ public class Chromosome {
         return Integer.parseInt(gene, 2);
     }
 
-    private Float getVal(String gene) {
+    private float getVal(String gene) {
         return Float.parseFloat(gene);
     }
 }

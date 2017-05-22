@@ -8,6 +8,6 @@ public class test {
     public static void main(String[] args) {
 
         Chromosome c = new Chromosome();
-        System.out.println(c.evaluate());
+        int i = 1/ 0;
     }
 }
