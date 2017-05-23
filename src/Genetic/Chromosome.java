@@ -8,10 +8,18 @@ public class Chromosome {
     private final static int CHROMOSOME_SIZE = 36;
     private String chromosome;
     private float fitness;
+    private String function;
 
-    public Chromosome(){}
+    public Chromosome(){
 
-    public void init() {
+        init();
+    }
+
+    public Chromosome(String chromosome) {
+        this.chromosome = chromosome;
+    }
+
+    private void init() {
 
         StringBuilder temp = new StringBuilder(CHROMOSOME_SIZE);
         for (int i = 0; i < CHROMOSOME_SIZE; i++) {
@@ -66,9 +74,10 @@ public class Chromosome {
 
         }
         //Remove last val if it's a hanging operator
-        if ("+-*/".contains(sequence.get(sequence.size() - 1))) {
+        if (sequence.size() > 0 && "+-*/".contains(sequence.get(sequence.size() - 1))) {
             sequence.remove(sequence.size() - 1);
         }
+        function = sequence.toString();
 
         //Evaluate multiplication and division
         for (int i = 0; i < sequence.size(); i++) {
@@ -122,5 +131,32 @@ public class Chromosome {
 
     private float getVal(String gene) {
         return Float.parseFloat(gene);
+    }
+
+    public String getChromosome() {
+        return chromosome;
+    }
+
+    public int getChromosomeSize() {
+        return CHROMOSOME_SIZE;
+    }
+
+    public String getLeftSplit(int split) {
+        return chromosome.substring(0, split);
+    }
+
+    public String getRightSplit(int split) {
+        return chromosome.substring(split);
+    }
+
+    public void printFunction() {
+        StringBuilder ret = new StringBuilder();
+        for (int i = 0; i < function.length(); i++) {
+            if (!"[],".contains(function.substring(i, i + 1))) {
+                ret.append(function.substring(i, i + 1));
+            }
+        }
+
+        System.out.println(ret.toString());
     }
 }
